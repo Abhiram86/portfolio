@@ -56,6 +56,16 @@ export const PORTFOLIO_DATA = {
   ],
   projects: [
     {
+      name: "EchoTune",
+      date: "May 2026",
+      tags: ["Go", "CLI", "TUI"],
+      links: [{ label: "GitHub", url: "https://github.com/Abhiram86/echotune" }],
+      points: [
+        "Developed a fast, terminal-based music player and downloader in Go featuring an interactive Bubble Tea TUI.",
+        "Implemented YouTube search, local playlist management, and offline playback capabilities using mpv and yt-dlp."
+      ]
+    },
+    {
       name: "datarover",
       date: "Jan 2026 - Present",
       tags: ["JavaScript", "Pyodide", "DuckDB"],
