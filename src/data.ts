@@ -37,7 +37,7 @@ export const PORTFOLIO_DATA = {
     {
       company: "Labmentix",
       role: "Full Stack Developer Intern",
-      date: "June 2025 – Present",
+      date: "June 2025 - August 2025",
       points: [
         "Developed scalable multi-tenant web applications in React and Node.js, implementing custom state management and reducing API load times by 22%.",
         "Architected secure storage pipelines and cryptographic signing systems for 'Vaultdrive' and 'Signer', establishing modular, role-based access schemas."
