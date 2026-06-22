@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abhiram Alla - Resume</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #333;
+        }
+        @media print {
+            @page {
+                size: A4;
+                margin: 0.35in;
+            }
+            html,
+            body {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+                background: white !important;
+                font-size: 11px;
+            }
+            .no-print {
+                display: none;
+            }
+            .bg-white.max-w-\[850px\] {
+                max-width: none !important;
+                width: 100% !important;
+                padding: 0 !important;
+            }
+            header {
+                margin-bottom: 0.7rem !important;
+            }
+            h1 {
+                font-size: 1.45rem !important;
+                margin-bottom: 0.25rem !important;
+            }
+            section {
+                margin-bottom: 0.7rem !important;
+            }
+            .section-title {
+                margin-bottom: 0.35rem;
+                padding-bottom: 0.12rem;
+                font-size: 0.72rem;
+            }
+            h3 {
+                font-size: 0.86rem !important;
+            }
+            p,
+            li,
+            span,
+            a,
+            div {
+                line-height: 1.25 !important;
+            }
+            ul {
+                margin-top: 0.12rem !important;
+            }
+            li {
+                margin-top: 0 !important;
+                margin-bottom: 0 !important;
+            }
+            .mb-6 { margin-bottom: 0.7rem !important; }
+            .mb-4 { margin-bottom: 0.45rem !important; }
+            .mb-3 { margin-bottom: 0.35rem !important; }
+            .space-y-1\.5 > :not([hidden]) ~ :not([hidden]) { margin-top: 0.12rem !important; }
+            .space-y-1 > :not([hidden]) ~ :not([hidden]) { margin-top: 0.08rem !important; }
+        }
+        .section-title {
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 0.25rem;
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-size: 0.875rem;
+            font-weight: 700;
+            color: #1f2937;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 flex justify-center py-10 print:py-0 print:bg-white">
+
+    <div class="bg-white max-w-[850px] w-full p-10 shadow-lg print:shadow-none print:p-0">
+        
+        <!-- Header -->
+        <header class="text-center mb-6">
+            <h1 class="text-3xl font-bold text-gray-900 mb-2">Abhiram Alla</h1>
+            <div class="text-sm text-gray-600 flex flex-wrap justify-center gap-x-4 gap-y-1">
+                <span>📍 Raipur, India</span>
+                <span>📧 <a href="mailto:abhiramalla86@gmail.com" class="hover:text-blue-600">abhiramalla86@gmail.com</a></span>
+                <span>📱 8897428738</span>
+                <span>🔗 <a href="https://github.com/Abhiram86" target="_blank" class="hover:text-blue-600 text-blue-500">GitHub</a></span>
+                <span>🔗 <a href="https://www.linkedin.com/in/alla-abhiram-0684512ab/" target="_blank" class="hover:text-blue-600 text-blue-500">LinkedIn</a></span>
+                <span>🔗 <a href="https://scholar.google.com/citations?hl=en&user=428P4XcAAAAJ&view_op=list_works" target="_blank" class="hover:text-blue-600 text-blue-500">Google Scholar</a></span>
+            </div>
+        </header>
+
+        <!-- Education -->
+        <section class="mb-6">
+            <h2 class="section-title">Education</h2>
+            <div class="mb-3">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <h3 class="font-semibold text-gray-900">B.Tech in Computer Science and Engineering</h3>
+                        <p class="text-sm text-gray-700">International Institute of Information Technology (IIIT), Naya Raipur</p>
+                    </div>
+                    <div class="text-right text-sm text-gray-600">
+                        <p>Expected 2027</p>
+                        <p class="font-medium">CGPA: 7.9</p>
+                    </div>
+                </div>
+            </div>
+            <div class="flex justify-between text-sm mb-1">
+                <div>
+                    <span class="font-medium text-gray-800">Class XII (CBSE)</span> - Telangana
+                </div>
+                <div class="text-gray-600">2023 | 94.9%</div>
+            </div>
+            <div class="flex justify-between text-sm">
+                <div>
+                    <span class="font-medium text-gray-800">Class X (CBSE)</span>
+                </div>
+                <div class="text-gray-600">2021 | 96%</div>
+            </div>
+        </section>
+
+        <!-- Skills -->
+        <section class="mb-6">
+            <h2 class="section-title">Technical Skills</h2>
+            <div class="text-sm space-y-1.5">
+                <p><span class="font-semibold text-gray-800">Languages:</span> JavaScript, TypeScript, Python, C++, SQL, Go</p>
+                <p><span class="font-semibold text-gray-800">Frontend:</span> React.js, Next.js, React Native, Tailwind CSS, WebAssembly (WASM), TUI Frameworks</p>
+                <p><span class="font-semibold text-gray-800">Backend & Databases:</span> Node.js, Express, Flask, Systems Programming, Concurrency, API Design</p>
+                <p><span class="font-semibold text-gray-800">Machine Learning / Data:</span> Data Structures, High-Performance Computing (HPC), Data Science, Machine Learning</p>
+            </div>
+        </section>
+
+        <!-- Experience -->
+        <section class="mb-6">
+            <h2 class="section-title">Experience</h2>
+            
+            <div class="mb-4">
+                <div class="flex justify-between items-baseline mb-1">
+                    <h3 class="font-semibold text-gray-900 text-base">Labmentix</h3>
+                    <span class="text-sm text-gray-600 font-medium">June 2025 - August 2025</span>
+                </div>
+                <p class="text-sm text-gray-700 font-medium italic mb-1">Full Stack Developer Intern</p>
+                <ul class="list-disc list-inside text-sm text-gray-700 space-y-1 ml-1">
+                    <li>Developed scalable multi-tenant web applications in React and Node.js, implementing custom state management and reducing API load times by 22%.</li>
+                    <li>Architected secure storage pipelines and cryptographic signing systems for 'Vaultdrive' and 'Signer', establishing modular, role-based access schemas.</li>
+                </ul>
+            </div>
+
+            <div>
+                <div class="flex justify-between items-baseline mb-1">
+                    <h3 class="font-semibold text-gray-900 text-base">Prime Vacations</h3>
+                    <span class="text-sm text-gray-600 font-medium">October 2025 - January 2026</span>
+                </div>
+                <p class="text-sm text-gray-700 font-medium italic mb-1">Full Stack Developer Intern</p>
+                <ul class="list-disc list-inside text-sm text-gray-700 space-y-1 ml-1">
+                    <li>Refactored legacy UI elements and server processing routes, eliminating rendering latency and eliminating critical runtime server bugs under concurrency tests.</li>
+                    <li>Engineered a highly concurrent python-based web scraping platform utilizing automated proxy-rotation engines, ensuring low server resource consumption and sub-second execution latency.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Projects -->
+        <section class="mb-6">
+            <h2 class="section-title">Projects</h2>
+
+            <div class="mb-3">
+                <div class="flex justify-between items-baseline mb-0.5">
+                    <h3 class="font-semibold text-gray-900 text-base">EchoTune <a href="https://github.com/Abhiram86/echotune" target="_blank" class="text-blue-500 font-normal text-xs ml-1 hover:underline">[GitHub]</a></h3>
+                    <span class="text-sm text-gray-600">May 2026</span>
+                </div>
+                <ul class="list-disc list-outside text-sm text-gray-700 space-y-1 ml-4">
+                    <li>Designed an interactive, lightweight keyboard-driven Terminal User Interface (TUI) in Go using the Bubbletea framework, implementing concurrent search requests, reducing CPU usage to &lt;3% compared to browser-based utilities.</li>
+                </ul>
+            </div>
+
+            <div class="mb-3">
+                <div class="flex justify-between items-baseline mb-0.5">
+                    <h3 class="font-semibold text-gray-900 text-base">In-Browser WebAssembly Query Engine <a href="https://datarover.vercel.app/" target="_blank" class="text-blue-500 font-normal text-xs ml-1 hover:underline">[Live]</a> <a href="https://github.com/Abhiram86/datarover" target="_blank" class="text-blue-500 font-normal text-xs hover:underline">[GitHub]</a></h3>
+                    <span class="text-sm text-gray-600">January 2026 - Present</span>
+                </div>
+                <ul class="list-disc list-outside text-sm text-gray-700 space-y-1 ml-4">
+                    <li>Engineered an in-browser database execution engine utilizing Pyodide (WASM) and DuckDB, allowing client-side local queries directly on JSON/CSV datasets, removing server compute overhead entirely.</li>
+                </ul>
+            </div>
+
+            <div class="mb-3">
+                <div class="flex justify-between items-baseline mb-0.5">
+                    <h3 class="font-semibold text-gray-900 text-base">Vaultdrive <a href="https://github.com/Abhiram86/vaultdrive_client" target="_blank" class="text-blue-500 font-normal text-xs ml-1 hover:underline">[Client]</a> <a href="https://github.com/Abhiram86/vaultdrive_server" target="_blank" class="text-blue-500 font-normal text-xs hover:underline">[Server]</a></h3>
+                    <span class="text-sm text-gray-600">August 2025 - September 2025</span>
+                </div>
+                <ul class="list-disc list-outside text-sm text-gray-700 space-y-1 ml-4">
+                    <li>Built a cloud storage web application enabling users to store and manage files.</li>
+                    <li>Implemented permission controls to support both private file storage and public link sharing.</li>
+                </ul>
+            </div>
+
+            <div class="mb-3">
+                <div class="flex justify-between items-baseline mb-0.5">
+                    <h3 class="font-semibold text-gray-900 text-base">event sync <a href="https://github.com/Abhiram86/event_sync" target="_blank" class="text-blue-500 font-normal text-xs ml-1 hover:underline">[GitHub]</a></h3>
+                    <span class="text-sm text-gray-600">July 2025</span>
+                </div>
+                <ul class="list-disc list-outside text-sm text-gray-700 space-y-1 ml-4">
+                    <li>Developed a React Native application for event registration.</li>
+                    <li>Leveraged WebSockets to display live registration updates to users as they join or leave events.</li>
+                </ul>
+            </div>
+
+            <div class="mb-3">
+                <div class="flex justify-between items-baseline mb-0.5">
+                    <h3 class="font-semibold text-gray-900 text-base">Docquer <a href="https://github.com/Abhiram86/docquer" target="_blank" class="text-blue-500 font-normal text-xs ml-1 hover:underline">[GitHub]</a></h3>
+                    <span class="text-sm text-gray-600">Nov 2024 - Dec 2024</span>
+                </div>
+                <ul class="list-disc list-outside text-sm text-gray-700 space-y-1 ml-4">
+                    <li>Created a customizable chatbot interface supporting bring-your-own API keys.</li>
+                    <li>Implemented a custom Markdown renderer to correctly display complex outputs like tables and code blocks in chat responses.</li>
+                </ul>
+            </div>
+
+            <div class="mb-3">
+                <div class="flex justify-between items-baseline mb-0.5">
+                    <h3 class="font-semibold text-gray-900 text-base">Nakama <a href="https://github.com/Abhiram86/nakama" target="_blank" class="text-blue-500 font-normal text-xs ml-1 hover:underline">[GitHub]</a></h3>
+                    <span class="text-sm text-gray-600">Aug 2024 - Sep 2024</span>
+                </div>
+                <ul class="list-disc list-outside text-sm text-gray-700 space-y-1 ml-4">
+                    <li>Built a real-time socket-based chatting application.</li>
+                    <li>Focused on state synchronization to ensure reliable, error-free bidirectional message delivery between clients.</li>
+                </ul>
+            </div>
+
+            <div class="mb-3">
+                <div class="flex justify-between items-baseline mb-0.5">
+                    <h3 class="font-semibold text-gray-900 text-base">Readit <a href="https://github.com/Abhiram86/readit" target="_blank" class="text-blue-500 font-normal text-xs ml-1 hover:underline">[GitHub]</a></h3>
+                    <span class="text-sm text-gray-600">Mar 2024 - May 2025</span>
+                </div>
+                <ul class="list-disc list-outside text-sm text-gray-700 space-y-1 ml-4">
+                    <li>Developed a social media platform featuring posts, image handling, and community creation.</li>
+                </ul>
+            </div>
+
+        </section>
+
+        <!-- Certifications & Achievements -->
+        <section>
+            <h2 class="section-title">Certifications & Achievements</h2>
+            <ul class="list-disc list-outside text-sm text-gray-700 space-y-1.5 ml-4">
+                <li><span class="font-semibold text-gray-800">Publications:</span> Published 2 peer-reviewed Research papers in IJRSI journal, demonstrating rigorous architectural analysis, technical writing, and problem validation.</li>
+                <li><span class="font-semibold text-gray-800">Test Ranks:</span> JEE Advance Rank: 11802 | JEE Mains Rank: 24545</li>
+                <li><span class="font-semibold text-gray-800">Expertise:</span> Parallel Computing, High-Performance Computing (HPC), Engine Optimization, and Computational Infrastructure.</li>
+            </ul>
+        </section>
+
+    </div>
+
+</body>
+</html>

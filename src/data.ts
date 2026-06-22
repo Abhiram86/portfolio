@@ -7,6 +7,7 @@ export const PORTFOLIO_DATA = {
   email: "abhiramalla86@gmail.com",
   github: "https://github.com/Abhiram86",
   linkedin: "https://www.linkedin.com/in/alla-abhiram-0684512ab/",
+  scholar: "https://scholar.google.com/citations?hl=en&user=428P4XcAAAAJ&view_op=list_works",
   education: [
     {
       institution: "International Institute of Information Technology (IIIT), Naya Raipur",

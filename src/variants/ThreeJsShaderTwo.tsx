@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import type { ComponentRef, ReactNode } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { Environment, MeshDistortMaterial, Sphere, Float, OrbitControls, Sparkles, Torus } from '@react-three/drei'
@@ -84,6 +84,7 @@ function InteractiveBlob() {
 }
 
 export default function ThreeJsShaderTwo() {
+  const [showResume, setShowResume] = useState(false)
   return (
     <div className="relative min-h-screen bg-black text-white font-sans overflow-x-hidden">
       
@@ -151,9 +152,12 @@ export default function ThreeJsShaderTwo() {
                     <a href={PORTFOLIO_DATA.github} className="hover:text-white text-gray-400 transition-colors uppercase flex justify-between items-center group">
                       <span>GitHub</span> <span className="text-[#ff0055] group-hover:translate-x-2 transition-transform">→</span>
                     </a>
-                    <a href={PORTFOLIO_DATA.linkedin} className="hover:text-white text-gray-400 transition-colors uppercase flex justify-between items-center group">
-                      <span>LinkedIn</span> <span className="text-[#00ffff] group-hover:translate-x-2 transition-transform">→</span>
-                    </a>
+                     <a href={PORTFOLIO_DATA.linkedin} className="hover:text-white text-gray-400 transition-colors uppercase flex justify-between items-center group">
+                       <span>LinkedIn</span> <span className="text-[#00ffff] group-hover:translate-x-2 transition-transform">→</span>
+                     </a>
+                     <a href={PORTFOLIO_DATA.scholar} className="hover:text-white text-gray-400 transition-colors uppercase flex justify-between items-center group">
+                       <span>Google Scholar</span> <span className="text-[#ff0055] group-hover:translate-x-2 transition-transform">→</span>
+                     </a>
                     <a href={`mailto:${PORTFOLIO_DATA.email}`} className="text-sm hover:text-white text-gray-400 transition-colors break-all mt-4 pt-4 border-t border-white/10">
                       {PORTFOLIO_DATA.email}
                     </a>
@@ -242,9 +246,33 @@ export default function ThreeJsShaderTwo() {
                      </ul>
                    </div>
                  </div>
-               </div>
+                </div>
 
-            </div>
+                  {/* Resume */}
+                  <div className={`${panelClass} xl:col-span-3`}>
+                    <div className="flex items-center justify-between">
+                      <SectionTitle className="text-white/80">Resume</SectionTitle>
+                      <button
+                        onClick={() => setShowResume(v => !v)}
+                        className="text-xs font-mono text-[#00ffff] border border-[#00ffff]/30 px-3 py-1.5 uppercase hover:bg-[#00ffff] hover:text-black transition-colors"
+                      >
+                        {showResume ? 'Close' : 'View Resume'}
+                      </button>
+                    </div>
+                    {showResume && (
+                      <div className="w-full h-[80vh] bg-white/95 rounded-lg overflow-hidden border border-white/10">
+                        <iframe
+                          src="/resume.html"
+                          width="100%"
+                          height="100%"
+                          className="border-none"
+                          title="Abhiram Alla Resume"
+                        />
+                      </div>
+                    )}
+                  </div>
+
+             </div>
          </div>
       </div>
     </div>
