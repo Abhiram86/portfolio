@@ -168,8 +168,19 @@
         </section>
 
         <!-- Projects -->
-        <section class="mb-6">
-            <h2 class="section-title">Projects</h2>
+<section class="mb-6">
+  <h2 class="section-title">Projects</h2>
+
+  <div class="mb-3">
+    <div class="flex justify-between items-baseline mb-0.5">
+      <h3 class="font-semibold text-gray-900 text-base">TransNet <a href="https://github.com/Abhiram86/transnet/releases" target="_blank" class="text-blue-500 font-normal text-xs ml-1 hover:underline">[Releases]</a></h3>
+    </div>
+    <ul class="list-disc list-outside text-sm text-gray-700 space-y-1 ml-4">
+      <li>Peer-to-peer Android file transfer using UDP broadcast for device discovery and TCP for streaming — no internet or router required.</li>
+      <li>Implemented real-time per-file and aggregate progress bars, cancel/skip controls, and atomic writes (part files, rename on success, delete on failure).</li>
+      <li>Built the transfer engine in Go via gomobile AAR, bridged to Expo React Native through Kotlin Expo Modules API.</li>
+    </ul>
+  </div>
 
             <div class="mb-3">
                 <div class="flex justify-between items-baseline mb-0.5">

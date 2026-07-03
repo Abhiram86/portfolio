@@ -119,15 +119,25 @@ export const PORTFOLIO_DATA = {
         "Focused on state synchronization to ensure reliable, error-free bidirectional message delivery between clients."
       ]
     },
-    {
-      name: "Readit",
-      date: "Mar 2024 - May 2025",
-      tags: ["Social Media", "Full Stack"],
-      links: [{ label: "GitHub", url: "https://github.com/Abhiram86/readit" }],
-      points: [
-        "Developed a social media platform featuring posts, image handling, and community creation."
-      ]
-    }
+  {
+    name: "Readit",
+    date: "Mar 2024 - May 2025",
+    tags: ["Social Media", "Full Stack"],
+    links: [{ label: "GitHub", url: "https://github.com/Abhiram86/readit" }],
+    points: [
+      "Developed a social media platform featuring posts, image handling, and community creation."
+    ]
+  },
+  {
+    name: "TransNet",
+    tags: ["Go", "Kotlin", "React Native", "UDP", "TCP", "P2P"],
+    links: [{ label: "Releases", url: "https://github.com/Abhiram86/transnet/releases" }],
+    points: [
+      "Peer-to-peer Android file transfer using UDP broadcast for device discovery and TCP for streaming — no internet or router required.",
+      "Implemented real-time per-file and aggregate progress bars, cancel/skip controls, and atomic writes (.part files, rename on success, delete on failure).",
+      "Built the transfer engine in Go via gomobile AAR, bridged to Expo React Native through Kotlin Expo Modules API."
+    ]
+  }
   ],
   achievements: [
     { title: "Publications", desc: "Published 2 peer-reviewed Research papers in IJRSI journal, demonstrating rigorous architectural analysis, technical writing, and problem validation." },
