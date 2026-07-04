@@ -1,8 +1,7 @@
 import { useRef, useMemo, useState, useEffect } from "react";
 import type { ReactNode } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Float } from "@react-three/drei";
-import * as THREE from "three";
+import * as THREE from "three"
 import { PORTFOLIO_DATA } from "../data";
 
 /* ─── Aurora Sky ─── */
@@ -33,16 +32,16 @@ const gridVert = `varying vec2 vUv; void main() { vUv = uv; gl_Position = projec
 const gridFrag = `
 precision highp float;
 uniform float uTime;
-varying vec2 vUv;
-float grid(vec2 p,float l){vec2 g=abs(fract(p*l-.5)-.5)/fwidth(p*l);return 1.-min(min(g.x,g.y),1.);}
+float grid(vec2 p,float l){vec2 g=abs(fract(p*l-.5)-.5)/(1./l);return 1.-min(min(g.x,g.y),1.);}
 void main(){
   vec2 uv=vUv; uv.y+=uTime*.18;
   float g=grid(uv,35.)*.35, g2=grid(uv,8.)*.12;
-  float vig=1.-smoothstep(.2,.75,length(vUv-.5))*.7;
+  float vig=1.-smoothstep(.2,.85,length(vUv-.5))*.65;
   vec3 col=vec3(.02,0.,.05);
   col+=vec3(0.,.83,.67)*g*.55; col+=vec3(.22,.82,1.)*g2*.4;
   col*=vig;
   gl_FragColor=vec4(col,.92);
+}
 }`;
 
 /* ─── 3D Components ─── */
@@ -84,13 +83,16 @@ function CyberGrid() {
 }
 
 function FloatingAuroraCubes() {
-  const g = useRef<THREE.Group>(null!);
+  const g = useRef<THREE.Group>(null!)
   useFrame((s) => {
-    if (g.current) g.current.rotation.y = s.clock.elapsedTime * 0.04;
-  });
+    if (!g.current) return
+    g.current.rotation.y = s.clock.elapsedTime * 0.04
+    // gentle floating motion inline instead of 15 separate Float animators
+    g.current.position.y = Math.sin(s.clock.elapsedTime * 0.5) * 0.25
+  })
   const cubes = useMemo(
     () =>
-      Array.from({ length: 15 }).map((_, i) => ({
+      Array.from({ length: 12 }).map((_, i) => ({
         pos: [
           (Math.random() - 0.5) * 14,
           (Math.random() - 0.5) * 7,
@@ -105,63 +107,25 @@ function FloatingAuroraCubes() {
         c: ["#00d4aa", "#c084fc", "#f472b6", "#38bdf8", "#a855f7"][i % 5],
       })),
     [],
-  );
+  )
   return (
     <group ref={g}>
       {cubes.map((c, i) => (
-        <Float key={i} speed={2} rotationIntensity={0.5} floatIntensity={1}>
-          <mesh position={c.pos} rotation={c.rot} scale={c.s}>
-            <boxGeometry args={[1, 1, 1]} />
-            <meshBasicMaterial
-              color={c.c}
-              wireframe
-              transparent
-              opacity={0.25}
-            />
-          </mesh>
-        </Float>
+        <mesh key={i} position={c.pos} rotation={c.rot} scale={c.s}>
+          <boxGeometry args={[1, 1, 1]} />
+          <meshBasicMaterial
+            color={c.c}
+            wireframe
+            transparent
+            opacity={0.25}
+          />
+        </mesh>
       ))}
     </group>
-  );
+  )
 }
 
-function AuroraParticles() {
-  const N = 300;
-  const mesh = useRef<THREE.InstancedMesh>(null!);
-  const pos = useMemo(() => {
-    const p = new Float32Array(N * 3);
-    for (let i = 0; i < N; i++) {
-      p[i * 3] = (Math.random() - 0.5) * 20;
-      p[i * 3 + 1] = Math.random() * 14 - 5;
-      p[i * 3 + 2] = (Math.random() - 0.5) * 10 - 5;
-    }
-    return p;
-  }, []);
-  const spd = useMemo(() => {
-    const s = new Float32Array(N);
-    for (let i = 0; i < N; i++) s[i] = 0.5 + Math.random() * 1.5;
-    return s;
-  }, []);
-  const dummy = useMemo(() => new THREE.Object3D(), []);
-  useFrame((s) => {
-    if (!mesh.current) return;
-    const t = s.clock.elapsedTime;
-    for (let i = 0; i < N; i++) {
-      const y = ((pos[i * 3 + 1] - t * spd[i] * 0.25) % 14) - 5;
-      dummy.position.set(pos[i * 3], y, pos[i * 3 + 2]);
-      dummy.scale.setScalar(0.02 + Math.random() * 0.03);
-      dummy.updateMatrix();
-      mesh.current.setMatrixAt(i, dummy.matrix);
-    }
-    mesh.current.instanceMatrix.needsUpdate = true;
-  });
-  return (
-    <instancedMesh ref={mesh} args={[undefined, undefined, N]}>
-      <sphereGeometry args={[1, 4, 4]} />
-      <meshBasicMaterial color="#00d4aa" transparent opacity={0.55} />
-    </instancedMesh>
-  );
-}
+/* No particle system — removed 300-particle instanced mesh with per-frame random calls */
 
 /* ─── UI ─── */
 function GlitchText({
@@ -241,7 +205,6 @@ export default function CyberpunkAurora() {
           <AuroraSky />
           <CyberGrid />
           <FloatingAuroraCubes />
-          <AuroraParticles />
         </Canvas>
       </div>
       {/* Scanlines */}{" "}
