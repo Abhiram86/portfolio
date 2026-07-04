@@ -1,7 +1,7 @@
-import ThreeJsShaderTwo from './variants/ThreeJsShaderTwo';
+import CyberpunkAurora from './variants/CyberpunkAurora'
 
 function App() {
-  return <ThreeJsShaderTwo />;
+  return <CyberpunkAurora />
 }
 
-export default App;
+export default App
