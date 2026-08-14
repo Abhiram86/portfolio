@@ -1,7 +1,9 @@
 import CyberpunkAurora from './variants/CyberpunkAurora'
 
 function App() {
-  return <CyberpunkAurora />
+  return <>
+    <CyberpunkAurora />
+  </>
 }
 
 export default App
