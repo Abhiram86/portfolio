@@ -127,7 +127,9 @@
       </div>
       <ul>
         <li>Flutter agent with a custom tool-calling loop over OpenAI-compatible APIs — up to 12 turns per request with live streaming of text and reasoning deltas.</li>
-        <li>Tools for guarded document reads (PDF/DOCX/XLSX/PPTX), sandboxed storage navigation, web search/fetch (Tavily), and 17 Android intents; local-first persistence via Drift/SQLite.</li>
+        <li>Operates directly on the Android filesystem: sandboxed workspace navigation over shared storage with path-traversal guards, and bounded reads that paginate PDF/DOCX/XLSX/PPTX documents (zip-bomb and size protected) so the LLM can digest real files, not just chat.</li>
+        <li>Drives the OS itself through 17 curated Android intents — apps, URLs, maps, dialing, alarms, calendar events, media playback, system settings — plus a raw intent escape hatch for anything unlisted; web search/fetch via Tavily rounds out the toolset.</li>
+        <li>Fully local-first: conversations, messages, and attachments persist in Drift/SQLite with no cloud sync; context managed against a 200K-char limit via history truncation and message windowing.</li>
       </ul>
     </div>
 
