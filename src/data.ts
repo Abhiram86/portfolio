@@ -77,6 +77,17 @@ export const PORTFOLIO_DATA = {
   ],
   projects: [
     {
+      name: "Errand — On-Device AI Agent",
+      date: "Aug 2026",
+      tags: ["Flutter", "LLM Agents", "Tool Calling", "SQLite"],
+      links: [{ label: "GitHub", url: "https://github.com/Abhiram86/errand" }],
+      points: [
+        "On-device AI agent for Android: custom tool-calling loop over OpenAI-compatible APIs with up to 12 turns per request and live streaming of text and reasoning deltas.",
+        "Implemented guarded document reads (PDF/DOCX/XLSX/PPTX), sandboxed storage navigation, web search/fetch (Tavily), and 17 curated Android intents.",
+        "Context management against a 200K-char limit; local-first persistence in Drift/SQLite."
+      ]
+    },
+    {
       name: "TransNet",
       tags: ["Go", "Kotlin", "React Native", "UDP", "TCP", "P2P"],
       links: [
