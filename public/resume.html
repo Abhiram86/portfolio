@@ -1,285 +1,218 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Abhiram Alla - Resume</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-        body {
-            font-family: 'Inter', sans-serif;
-            color: #333;
-        }
-        @media print {
-            @page {
-                size: A4;
-                margin: 0.35in;
-            }
-            html,
-            body {
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
-                background: white !important;
-                font-size: 11px;
-            }
-            .no-print {
-                display: none;
-            }
-            .bg-white.max-w-\[850px\] {
-                max-width: none !important;
-                width: 100% !important;
-                padding: 0 !important;
-            }
-            header {
-                margin-bottom: 0.7rem !important;
-            }
-            h1 {
-                font-size: 1.45rem !important;
-                margin-bottom: 0.25rem !important;
-            }
-            section {
-                margin-bottom: 0.7rem !important;
-            }
-            .section-title {
-                margin-bottom: 0.35rem;
-                padding-bottom: 0.12rem;
-                font-size: 0.72rem;
-            }
-            h3 {
-                font-size: 0.86rem !important;
-            }
-            p,
-            li,
-            span,
-            a,
-            div {
-                line-height: 1.25 !important;
-            }
-            ul {
-                margin-top: 0.12rem !important;
-            }
-            li {
-                margin-top: 0 !important;
-                margin-bottom: 0 !important;
-            }
-            .mb-6 { margin-bottom: 0.7rem !important; }
-            .mb-4 { margin-bottom: 0.45rem !important; }
-            .mb-3 { margin-bottom: 0.35rem !important; }
-            .space-y-1\.5 > :not([hidden]) ~ :not([hidden]) { margin-top: 0.12rem !important; }
-            .space-y-1 > :not([hidden]) ~ :not([hidden]) { margin-top: 0.08rem !important; }
-        }
-        .section-title {
-            border-bottom: 1px solid #e5e7eb;
-            padding-bottom: 0.25rem;
-            margin-bottom: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            font-size: 0.875rem;
-            font-weight: 700;
-            color: #1f2937;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Abhiram Alla — Resume</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+  :root { --ink:#1a1a1a; --muted:#555; --accent:#0b5394; --rule:#d0d0d0; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html, body { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  body {
+    font-family:'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    color:var(--ink); font-size:11px; line-height:1.35;
+    background:#e9e9ec; display:flex; justify-content:center; padding:24px;
+  }
+  .sheet {
+    width:210mm; min-height:297mm; background:#fff; padding:12mm 14mm;
+    box-shadow:0 2px 12px rgba(0,0,0,.18);
+  }
+  header { text-align:center; border-bottom:2px solid var(--ink); padding-bottom:6px; margin-bottom:10px; }
+  h1 { font-size:24px; font-weight:800; letter-spacing:.02em; }
+  .role { font-size:12.5px; font-weight:600; color:var(--accent); margin-top:2px; }
+  .contact { margin-top:5px; font-size:10.5px; color:var(--muted); display:flex; flex-wrap:wrap; justify-content:center; gap:2px 12px; }
+  .contact a { color:var(--accent); text-decoration:none; }
+
+  section { margin-bottom:9px; }
+  .sec-title {
+    font-size:11.5px; font-weight:700; text-transform:uppercase; letter-spacing:.08em;
+    border-bottom:1px solid var(--rule); padding-bottom:2px; margin-bottom:5px; color:var(--ink);
+  }
+  .item { margin-bottom:6px; }
+  .item:last-child { margin-bottom:0; }
+  .head { display:flex; justify-content:space-between; align-items:baseline; }
+  .org { font-weight:700; }
+  .date { color:var(--muted); font-size:10px; white-space:nowrap; }
+  .sub { font-weight:600; font-style:italic; color:var(--accent); font-size:10.5px; margin:1px 0 2px; }
+  ul { list-style:none; }
+  li { position:relative; padding-left:11px; margin-bottom:2px; }
+  li::before { content:"–"; position:absolute; left:0; color:var(--muted); }
+  b { font-weight:600; }
+
+  .skills p { margin-bottom:2px; }
+  .skills p:last-child { margin-bottom:0; }
+  .skill-lbl { font-weight:700; }
+
+  .projects li { margin-bottom:2px; }
+  .proj-head .org span { font-weight:600; font-style:italic; color:var(--muted); font-size:10px; }
+  .proj-links a { color:var(--accent); text-decoration:none; font-weight:500; font-size:10px; margin-left:6px; }
+  .achv li { margin-bottom:2px; }
+
+  @media print {
+    @page { size:A4; margin:12mm 14mm; }
+    body { background:#fff; padding:0; font-size:10.5px; }
+    .sheet { width:auto; min-height:auto; padding:0; box-shadow:none; }
+    section { margin-bottom:8px; }
+    .item { margin-bottom:5px; }
+  }
+</style>
 </head>
-<body class="bg-gray-50 flex justify-center py-10 print:py-0 print:bg-white">
+<body>
+<div class="sheet">
 
-    <div class="bg-white max-w-[850px] w-full p-10 shadow-lg print:shadow-none print:p-0">
-        
-        <!-- Header -->
-        <header class="text-center mb-6">
-            <h1 class="text-3xl font-bold text-gray-900 mb-2">Abhiram Alla</h1>
-            <div class="text-sm text-gray-600 flex flex-wrap justify-center gap-x-4 gap-y-1">
-                <span>📍 Raipur, India</span>
-                <span>📧 <a href="mailto:abhiramalla86@gmail.com" class="hover:text-blue-600">abhiramalla86@gmail.com</a></span>
-                <span>📱 8897428738</span>
-                <span>🔗 <a href="https://github.com/Abhiram86" target="_blank" class="hover:text-blue-600 text-blue-500">GitHub</a></span>
-                <span>🔗 <a href="https://www.linkedin.com/in/alla-abhiram-0684512ab/" target="_blank" class="hover:text-blue-600 text-blue-500">LinkedIn</a></span>
-                <span>🔗 <a href="https://scholar.google.com/citations?hl=en&user=428P4XcAAAAJ&view_op=list_works" target="_blank" class="hover:text-blue-600 text-blue-500">Google Scholar</a></span>
-            </div>
-        </header>
-
-        <!-- Education -->
-        <section class="mb-6">
-            <h2 class="section-title">Education</h2>
-            <div class="mb-3">
-                <div class="flex justify-between items-start">
-                    <div>
-                        <h3 class="font-semibold text-gray-900">B.Tech in Computer Science and Engineering</h3>
-                        <p class="text-sm text-gray-700">International Institute of Information Technology (IIIT), Naya Raipur</p>
-                    </div>
-                    <div class="text-right text-sm text-gray-600">
-                        <p>Expected 2027</p>
-                        <p class="font-medium">CGPA: 7.9</p>
-                    </div>
-                </div>
-            </div>
-            <div class="flex justify-between text-sm mb-1">
-                <div>
-                    <span class="font-medium text-gray-800">Class XII (CBSE)</span> - Telangana
-                </div>
-                <div class="text-gray-600">2023 | 94.9%</div>
-            </div>
-            <div class="flex justify-between text-sm">
-                <div>
-                    <span class="font-medium text-gray-800">Class X (CBSE)</span>
-                </div>
-                <div class="text-gray-600">2021 | 96%</div>
-            </div>
-        </section>
-
-        <!-- Skills -->
-        <section class="mb-6">
-            <h2 class="section-title">Technical Skills</h2>
-            <div class="text-sm space-y-1.5">
-                <p><span class="font-semibold text-gray-800">Languages:</span> JavaScript, TypeScript, Python, C++, SQL, Go</p>
-                <p><span class="font-semibold text-gray-800">Frontend:</span> React.js, Next.js, React Native, Tailwind CSS, WebAssembly (WASM), TUI Frameworks</p>
-                <p><span class="font-semibold text-gray-800">Backend & Databases:</span> Node.js, Express, Flask, Systems Programming, Concurrency, API Design</p>
-                <p><span class="font-semibold text-gray-800">Machine Learning / Data:</span> Data Structures, High-Performance Computing (HPC), Data Science, Machine Learning</p>
-            </div>
-        </section>
-
-        <!-- Experience -->
-        <section class="mb-6">
-            <h2 class="section-title">Experience</h2>
-            
-            <div class="mb-4">
-                <div class="flex justify-between items-baseline mb-1">
-                    <h3 class="font-semibold text-gray-900 text-base">Labmentix</h3>
-                    <span class="text-sm text-gray-600 font-medium">June 2025 - August 2025</span>
-                </div>
-                <p class="text-sm text-gray-700 font-medium italic mb-1">Full Stack Developer Intern</p>
-                <ul class="list-disc list-inside text-sm text-gray-700 space-y-1 ml-1">
-                    <li>Developed scalable multi-tenant web applications in React and Node.js, implementing custom state management and reducing API load times by 22%.</li>
-                    <li>Architected secure storage pipelines and cryptographic signing systems for 'Vaultdrive' and 'Signer', establishing modular, role-based access schemas.</li>
-                </ul>
-            </div>
-
-            <div>
-                <div class="flex justify-between items-baseline mb-1">
-                    <h3 class="font-semibold text-gray-900 text-base">Prime Vacations</h3>
-                    <span class="text-sm text-gray-600 font-medium">October 2025 - January 2026</span>
-                </div>
-                <p class="text-sm text-gray-700 font-medium italic mb-1">Full Stack Developer Intern</p>
-                <ul class="list-disc list-inside text-sm text-gray-700 space-y-1 ml-1">
-                    <li>Refactored legacy UI elements and server processing routes, eliminating rendering latency and eliminating critical runtime server bugs under concurrency tests.</li>
-                    <li>Engineered a highly concurrent python-based web scraping platform utilizing automated proxy-rotation engines, ensuring low server resource consumption and sub-second execution latency.</li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- Projects -->
-<section class="mb-6">
-  <h2 class="section-title">Projects</h2>
-
-  <div class="mb-3">
-    <div class="flex justify-between items-baseline mb-0.5">
-      <h3 class="font-semibold text-gray-900 text-base">Errand — On-Device AI Agent <a href="https://github.com/Abhiram86/errand" target="_blank" class="text-blue-500 font-normal text-xs ml-1 hover:underline">[GitHub]</a></h3>
-      <span class="text-sm text-gray-600">Aug 2026</span>
+  <header>
+    <h1>Abhiram Alla</h1>
+    <div class="role">Full Stack &amp; AI Product Engineer</div>
+    <div class="contact">
+      <span>Raipur, India</span>
+      <span><a href="mailto:abhiramalla86@gmail.com">abhiramalla86@gmail.com</a></span>
+      <span>+91 88974 28738</span>
+      <span><a href="https://github.com/Abhiram86">github.com/Abhiram86</a></span>
+      <span><a href="https://www.linkedin.com/in/alla-abhiram-0684512ab/">linkedin.com/in/alla-abhiram</a></span>
     </div>
-    <ul class="list-disc list-outside text-sm text-gray-700 space-y-1 ml-4">
-      <li>Built an on-device AI agent for Android with a custom tool-calling loop over OpenAI-compatible APIs, streaming responses across up to 12 agent turns.</li>
-      <li>Implemented guarded document-reading tools (PDF/DOCX/XLSX), sandboxed storage navigation, web search, and 17 Android intent actions; local persistence via Drift/SQLite.</li>
+  </header>
+
+  <section>
+    <p>Full-stack developer with 8 months of internship experience shipping React/Node.js products, plus a Go systems background and an AI-powered, in-browser data platform. Looking for a Software Engineer / Full-Stack internship role (open to AI-product engineering).</p>
+  </section>
+
+  <section>
+    <div class="sec-title">Education</div>
+    <div class="item">
+      <div class="head">
+        <div><span class="org">B.Tech, Computer Science &amp; Engineering</span> — IIIT Naya Raipur</div>
+        <div class="date">Expected 2027 · CGPA 7.9</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-title">Experience</div>
+
+    <div class="item">
+      <div class="head">
+        <div class="org">Prime Vacations</div>
+        <div class="date">Oct 2025 – Jan 2026</div>
+      </div>
+      <div class="sub">Full Stack Developer Intern</div>
+      <ul>
+        <li>Refactored legacy UI components and server routes, eliminating a class of concurrency-related runtime bugs and reducing page-render latency.</li>
+        <li>Built a Python web-scraping service with automated proxy rotation and sub-second execution latency at low server resource usage.</li>
+      </ul>
+    </div>
+
+    <div class="item">
+      <div class="head">
+        <div class="org">Labmentix</div>
+        <div class="date">Jun 2025 – Aug 2025</div>
+      </div>
+      <div class="sub">Full Stack Developer Intern</div>
+      <ul>
+        <li>Shipped multi-tenant document storage and signing apps (Vaultdrive, Signer) in React + Node.js with role-based access schemas; reduced API load times ~22% via memoized state and caching.</li>
+        <li>Designed a file-storage pipeline with cryptographic signing and granular permissions supporting both private storage and public link sharing.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-title">Projects</div>
+
+    <div class="item proj-head">
+      <div class="head">
+        <div class="org">Errand <span>— on-device AI agent for Android</span>
+          <span class="proj-links"><a href="https://github.com/Abhiram86/errand">[GitHub]</a></span>
+        </div>
+        <div class="date">Aug 2026</div>
+      </div>
+      <ul>
+        <li>Flutter agent with a custom tool-calling loop over OpenAI-compatible APIs — up to 12 turns per request with live streaming of text and reasoning deltas.</li>
+        <li>Tools for guarded document reads (PDF/DOCX/XLSX/PPTX), sandboxed storage navigation, web search/fetch (Tavily), and 17 Android intents; local-first persistence via Drift/SQLite.</li>
+      </ul>
+    </div>
+
+    <div class="item proj-head">
+      <div class="head">
+        <div class="org">DataRover <span>— AI data analysis workspace</span>
+          <span class="proj-links"><a href="https://datarover.vercel.app/">[Live]</a><a href="https://github.com/Abhiram86/datarover">[GitHub]</a></span>
+        </div>
+        <div class="date">Jan 2026 – Present</div>
+      </div>
+      <ul>
+        <li>Client-side data engine using DuckDB-WASM + Pyodide so users query/analyze large CSV/Excel files in-browser with zero server compute.</li>
+        <li>AI assistant (Vercel AI SDK) inspects the schema, writes and executes SQL/Python, and summarizes results; persistence via Supabase + Neon (PostgreSQL, Drizzle ORM).</li>
+      </ul>
+    </div>
+
+    <div class="item proj-head">
+      <div class="head">
+        <div class="org">TransNet <span>— offline P2P Android file transfer</span>
+          <span class="proj-links"><a href="https://github.com/Abhiram86/transnet/releases">[Releases]</a></span>
+        </div>
+        <div class="date">Jun 2026 – Jul 2026</div>
+      </div>
+      <ul>
+        <li>Go transfer engine compiled via gomobile, bridged to Expo React Native through the Kotlin Expo Modules API; UDP broadcast discovery + TCP streaming (no internet or router).</li>
+        <li>Atomic file writes (part files, rename on success), per-file progress bars, and cancel/skip controls; 3 tagged releases.</li>
+      </ul>
+    </div>
+
+    <div class="item proj-head">
+      <div class="head">
+        <div class="org">EventSync <span>— real-time event check-in app</span>
+          <span class="proj-links"><a href="https://github.com/Abhiram86/event_sync">[GitHub]</a></span>
+        </div>
+        <div class="date">Jul 2025</div>
+      </div>
+      <ul>
+        <li>React Native (Expo) + Node.js + GraphQL + Prisma + PostgreSQL (Neon), with Socket.io live attendee updates and JWT auth.</li>
+      </ul>
+    </div>
+
+    <div class="item proj-head">
+      <div class="head">
+        <div class="org">Vaultdrive <span>— cloud storage web app</span>
+          <span class="proj-links"><a href="https://github.com/Abhiram86/vaultdrive_client">[Client]</a><a href="https://github.com/Abhiram86/vaultdrive_server">[Server]</a></span>
+        </div>
+        <div class="date">Aug 2025 – Sep 2025</div>
+      </div>
+      <ul>
+        <li>Client (Vite/TypeScript) + server (Bun/TypeScript) with role-based permission controls for private files and public link sharing.</li>
+      </ul>
+    </div>
+
+    <div class="item proj-head">
+      <div class="head">
+        <div class="org">EchoTune <span>— Go terminal music player</span>
+          <span class="proj-links"><a href="https://github.com/Abhiram86/echotune">[GitHub]</a></span>
+        </div>
+        <div class="date">May 2026</div>
+      </div>
+      <ul>
+        <li>Bubbletea TUI with concurrent YouTube search/streaming via mpv/yt-dlp, history + downloads + playlists; runs at &lt;3% CPU versus browser-based tools.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-title">Technical Skills</div>
+    <div class="skills">
+      <p><span class="skill-lbl">Languages:</span> TypeScript, JavaScript, Python, Go, C++, SQL</p>
+      <p><span class="skill-lbl">Frontend:</span> React, Next.js, React Native (Expo), TanStack, Tailwind CSS, Zustand</p>
+      <p><span class="skill-lbl">Backend / Data:</span> Node.js, Express, Flask, GraphQL, WebSockets, PostgreSQL, Prisma, Drizzle, Redis, Docker, Bun, Git</p>
+      <p><span class="skill-lbl">AI / Data Eng:</span> DuckDB-WASM, Pyodide, Vercel AI SDK, Pandas, data pipelines</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-title">Achievements</div>
+    <ul class="achv">
+      <li><b>Publications:</b> 3 peer-reviewed research papers; most recent presented at LION20, Italy.</li>
+      <li><b>Test ranks:</b> JEE Advanced rank 11802 | JEE Main rank 24545 (2023).</li>
+      <li><b>Open source:</b> 44 public repositories, 109 total stars on GitHub.</li>
     </ul>
-  </div>
+  </section>
 
-  <div class="mb-3">
-    <div class="flex justify-between items-baseline mb-0.5">
-      <h3 class="font-semibold text-gray-900 text-base">TransNet <a href="https://github.com/Abhiram86/transnet/releases" target="_blank" class="text-blue-500 font-normal text-xs ml-1 hover:underline">[Releases]</a></h3>
-    </div>
-    <ul class="list-disc list-outside text-sm text-gray-700 space-y-1 ml-4">
-      <li>Peer-to-peer Android file transfer using UDP broadcast for device discovery and TCP for streaming — no internet or router required.</li>
-      <li>Implemented real-time per-file and aggregate progress bars, cancel/skip controls, and atomic writes (part files, rename on success, delete on failure).</li>
-      <li>Built the transfer engine in Go via gomobile AAR, bridged to Expo React Native through Kotlin Expo Modules API.</li>
-    </ul>
-  </div>
-
-            <div class="mb-3">
-                <div class="flex justify-between items-baseline mb-0.5">
-                    <h3 class="font-semibold text-gray-900 text-base">EchoTune <a href="https://github.com/Abhiram86/echotune" target="_blank" class="text-blue-500 font-normal text-xs ml-1 hover:underline">[GitHub]</a></h3>
-                    <span class="text-sm text-gray-600">May 2026</span>
-                </div>
-                <ul class="list-disc list-outside text-sm text-gray-700 space-y-1 ml-4">
-                    <li>Designed an interactive, lightweight keyboard-driven Terminal User Interface (TUI) in Go using the Bubbletea framework, implementing concurrent search requests, reducing CPU usage to &lt;3% compared to browser-based utilities.</li>
-                </ul>
-            </div>
-
-            <div class="mb-3">
-                <div class="flex justify-between items-baseline mb-0.5">
-                    <h3 class="font-semibold text-gray-900 text-base">In-Browser WebAssembly Query Engine <a href="https://datarover.vercel.app/" target="_blank" class="text-blue-500 font-normal text-xs ml-1 hover:underline">[Live]</a> <a href="https://github.com/Abhiram86/datarover" target="_blank" class="text-blue-500 font-normal text-xs hover:underline">[GitHub]</a></h3>
-                    <span class="text-sm text-gray-600">January 2026 - Present</span>
-                </div>
-                <ul class="list-disc list-outside text-sm text-gray-700 space-y-1 ml-4">
-                    <li>Engineered an in-browser database execution engine utilizing Pyodide (WASM) and DuckDB, allowing client-side local queries directly on JSON/CSV datasets, removing server compute overhead entirely.</li>
-                </ul>
-            </div>
-
-            <div class="mb-3">
-                <div class="flex justify-between items-baseline mb-0.5">
-                    <h3 class="font-semibold text-gray-900 text-base">Vaultdrive <a href="https://github.com/Abhiram86/vaultdrive_client" target="_blank" class="text-blue-500 font-normal text-xs ml-1 hover:underline">[Client]</a> <a href="https://github.com/Abhiram86/vaultdrive_server" target="_blank" class="text-blue-500 font-normal text-xs hover:underline">[Server]</a></h3>
-                    <span class="text-sm text-gray-600">August 2025 - September 2025</span>
-                </div>
-                <ul class="list-disc list-outside text-sm text-gray-700 space-y-1 ml-4">
-                    <li>Built a cloud storage web application enabling users to store and manage files.</li>
-                    <li>Implemented permission controls to support both private file storage and public link sharing.</li>
-                </ul>
-            </div>
-
-            <div class="mb-3">
-                <div class="flex justify-between items-baseline mb-0.5">
-                    <h3 class="font-semibold text-gray-900 text-base">event sync <a href="https://github.com/Abhiram86/event_sync" target="_blank" class="text-blue-500 font-normal text-xs ml-1 hover:underline">[GitHub]</a></h3>
-                    <span class="text-sm text-gray-600">July 2025</span>
-                </div>
-                <ul class="list-disc list-outside text-sm text-gray-700 space-y-1 ml-4">
-                    <li>Developed a React Native application for event registration.</li>
-                    <li>Leveraged WebSockets to display live registration updates to users as they join or leave events.</li>
-                </ul>
-            </div>
-
-            <div class="mb-3">
-                <div class="flex justify-between items-baseline mb-0.5">
-                    <h3 class="font-semibold text-gray-900 text-base">Docquer <a href="https://github.com/Abhiram86/docquer" target="_blank" class="text-blue-500 font-normal text-xs ml-1 hover:underline">[GitHub]</a></h3>
-                    <span class="text-sm text-gray-600">Nov 2024 - Dec 2024</span>
-                </div>
-                <ul class="list-disc list-outside text-sm text-gray-700 space-y-1 ml-4">
-                    <li>Created a customizable chatbot interface supporting bring-your-own API keys.</li>
-                    <li>Implemented a custom Markdown renderer to correctly display complex outputs like tables and code blocks in chat responses.</li>
-                </ul>
-            </div>
-
-            <div class="mb-3">
-                <div class="flex justify-between items-baseline mb-0.5">
-                    <h3 class="font-semibold text-gray-900 text-base">Nakama <a href="https://github.com/Abhiram86/nakama" target="_blank" class="text-blue-500 font-normal text-xs ml-1 hover:underline">[GitHub]</a></h3>
-                    <span class="text-sm text-gray-600">Aug 2024 - Sep 2024</span>
-                </div>
-                <ul class="list-disc list-outside text-sm text-gray-700 space-y-1 ml-4">
-                    <li>Built a real-time socket-based chatting application.</li>
-                    <li>Focused on state synchronization to ensure reliable, error-free bidirectional message delivery between clients.</li>
-                </ul>
-            </div>
-
-            <div class="mb-3">
-                <div class="flex justify-between items-baseline mb-0.5">
-                    <h3 class="font-semibold text-gray-900 text-base">Readit <a href="https://github.com/Abhiram86/readit" target="_blank" class="text-blue-500 font-normal text-xs ml-1 hover:underline">[GitHub]</a></h3>
-                    <span class="text-sm text-gray-600">Mar 2024 - May 2025</span>
-                </div>
-                <ul class="list-disc list-outside text-sm text-gray-700 space-y-1 ml-4">
-                    <li>Developed a social media platform featuring posts, image handling, and community creation.</li>
-                </ul>
-            </div>
-
-        </section>
-
-        <!-- Certifications & Achievements -->
-        <section>
-            <h2 class="section-title">Certifications & Achievements</h2>
-            <ul class="list-disc list-outside text-sm text-gray-700 space-y-1.5 ml-4">
-                <li><span class="font-semibold text-gray-800">Publications:</span> Published 3 peer-reviewed research papers (IJRSI + peer venues); most recently presented at LION20, Italy, demonstrating rigorous analytical writing, research validation, and conference communication.
-                <li><span class="font-semibold text-gray-800">Test Ranks:</span> JEE Advance Rank: 11802 | JEE Mains Rank: 24545</li>
-                <li><span class="font-semibold text-gray-800">Expertise:</span> Parallel Computing, High-Performance Computing (HPC), Engine Optimization, and Computational Infrastructure.</li>
-            </ul>
-        </section>
-
-    </div>
-
+</div>
 </body>
 </html>
