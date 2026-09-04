@@ -1,9 +1,9 @@
-import CyberpunkAurora from './variants/CyberpunkAurora'
+import MidnightAzure from './variants/MidnightAzure'
 
 function App() {
-  return <>
-    <CyberpunkAurora />
-  </>
+  return <MidnightAzure />
 }
 
 export default App
+
+
