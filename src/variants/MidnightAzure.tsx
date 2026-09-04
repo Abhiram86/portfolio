@@ -36,12 +36,12 @@ export default function MidnightAzure() {
   );
 
   return (
-    <div className="relative min-h-screen bg-[#030712] text-slate-100 font-sans selection:bg-blue-600/30 selection:text-blue-200 antialiased">
+    <div className="relative min-h-screen supports-[min-height:100dvh]:min-h-[100dvh] w-full overflow-x-clip bg-[#030712] text-slate-100 font-sans selection:bg-blue-600/30 selection:text-blue-200 antialiased">
       {/* 3D Organic Fluid Azure Background (pure morphed waves, no floating planets) */}
       <FluidCanvas3D />
 
       {/* Main Content Container with Mobile-Safe Padding */}
-      <div className="relative z-10 flex flex-col min-h-screen max-w-5xl mx-auto px-4 sm:px-8 lg:px-10">
+      <div className="relative z-10 flex flex-col min-h-screen supports-[min-height:100dvh]:min-h-[100dvh] max-w-5xl mx-auto px-4 sm:px-8 lg:px-10 overflow-x-clip">
         {/* Minimal Swiss Header */}
         <header className="py-5 sm:py-8 flex items-center justify-between border-b border-white/[0.08] gap-3">
           <div className="flex items-center space-x-2.5 sm:space-x-3 min-w-0">
@@ -129,7 +129,7 @@ export default function MidnightAzure() {
             {/* Email copy button with rich backdrop blur & solid frosted base */}
             <button
               onClick={handleCopyEmail}
-              className="w-full sm:w-auto px-4 py-3 rounded-lg bg-[#07132e]/90 hover:bg-[#0c204e] text-slate-100 hover:text-white border border-white/[0.15] backdrop-blur-2xl shadow-[0_4px_24px_rgba(0,0,0,0.5)] transition-all flex items-center justify-center space-x-2.5 font-medium max-w-full overflow-hidden text-center"
+              className="w-full sm:w-auto px-4 py-3 rounded-lg bg-[#07132e]/90 hover:bg-[#0c204e] text-slate-100 hover:text-white border border-white/[0.15] backdrop-blur-md transform-gpu shadow-[0_4px_24px_rgba(0,0,0,0.5)] transition-all flex items-center justify-center space-x-2.5 font-medium max-w-full overflow-hidden text-center"
             >
               <Mail className="w-3.5 h-3.5 text-blue-400 shrink-0" />
               <span className="truncate">{PORTFOLIO_DATA.email}</span>
@@ -512,7 +512,7 @@ export default function MidnightAzure() {
               {/* Email copy button with rich backdrop blur & solid frosted base */}
               <button
                 onClick={handleCopyEmail}
-                className="w-full sm:w-auto px-5 py-3 rounded-lg bg-[#07132e]/90 hover:bg-[#0c204e] text-slate-100 hover:text-white border border-white/[0.15] backdrop-blur-2xl shadow-[0_4px_24px_rgba(0,0,0,0.5)] transition-all flex items-center justify-center space-x-2.5 text-sm font-medium max-w-full overflow-hidden text-center"
+                className="w-full sm:w-auto px-5 py-3 rounded-lg bg-[#07132e]/90 hover:bg-[#0c204e] text-slate-100 hover:text-white border border-white/[0.15] backdrop-blur-md transform-gpu shadow-[0_4px_24px_rgba(0,0,0,0.5)] transition-all flex items-center justify-center space-x-2.5 text-sm font-medium max-w-full overflow-hidden text-center"
               >
                 <span className="truncate">{PORTFOLIO_DATA.email}</span>
                 {copiedEmail ? (
@@ -566,8 +566,11 @@ export default function MidnightAzure() {
           </div>
         </section>
 
-        {/* Minimal Footer */}
-        <footer className="py-8 border-t border-white/[0.06] text-xs text-slate-500 flex flex-col sm:flex-row items-center justify-between gap-4 font-medium">
+        {/* Minimal Footer with mobile safe area clearance */}
+        <footer
+          className="pt-8 pb-12 sm:pb-8 border-t border-white/[0.06] text-xs text-slate-500 flex flex-col sm:flex-row items-center justify-between gap-4 font-medium"
+          style={{ paddingBottom: 'max(2.5rem, env(safe-area-inset-bottom, 2.5rem))' }}
+        >
           <div>
             © {new Date().getFullYear()} {PORTFOLIO_DATA.name}
           </div>

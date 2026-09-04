@@ -223,8 +223,21 @@ export default function FluidCanvas3D({}: FluidCanvas3DProps) {
   }, []);
 
   return (
-    <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden bg-[#030712]">
+    <div
+      className="fixed pointer-events-none z-0 overflow-hidden bg-[#030712]"
+      style={{
+        top: "-20px",
+        left: 0,
+        width: "100%",
+        height: "calc(100lvh + 100px)",
+        minHeight: "calc(100vh + 100px)",
+        transform: "translate3d(0, 0, 0)",
+        WebkitTransform: "translate3d(0, 0, 0)",
+        willChange: "transform",
+      }}
+    >
       <Canvas
+        resize={{ scroll: false, debounce: { scroll: 50, resize: 100 } }}
         camera={{ position: [0, 0, 6.5], fov: 50 }}
         gl={{
           antialias: true,
@@ -239,7 +252,6 @@ export default function FluidCanvas3D({}: FluidCanvas3DProps) {
         <AtmosphericEmbers />
         <FluidAzureMesh mouseTarget={mouseTarget} />
       </Canvas>
-
     </div>
   );
 }
