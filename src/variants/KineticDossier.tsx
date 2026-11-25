@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import ScrollFluid3D from "../components/ScrollFluid3D";
 import ResumeModal from "../components/ResumeModal";
 import ArchitectureDiagram from "../components/ArchitectureDiagrams";
+import DitherCard from "../components/DitherCard";
 import { PORTFOLIO_DATA, type ProjectItem } from "../data";
 import { GithubIcon, LinkedinIcon } from "../components/Icons";
 import {
@@ -37,14 +38,14 @@ function KineticProjectCard({
   const [expanded, setExpanded] = useState(defaultOpen);
 
   return (
-    <article
+    <DitherCard
       id={`project-${project.id}`}
-      data-accent-color={project.accentColor || "#3b82f6"}
-      className={`rounded-2xl bg-[#070c18]/82 backdrop-blur-xl border transition-all duration-300 p-6 sm:p-9 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.06),0_18px_50px_rgba(0,0,0,0.45)] ${
-        isDominant
-          ? "border-white/[0.18]"
-          : "border-white/[0.08] hover:border-white/[0.14]"
-      }`}
+      dataAccentColor={project.accentColor || "#3b82f6"}
+      accentColor={project.accentColor || "#38bdf8"}
+      isDominant={isDominant}
+      ambientDither
+      cellSize={5}
+      className="p-6 sm:p-9"
     >
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-start">
         {/* Left Index Column */}
@@ -319,7 +320,7 @@ function KineticProjectCard({
           )}
         </div>
       </div>
-    </article>
+    </DitherCard>
   );
 }
 
@@ -457,23 +458,28 @@ export default function KineticDossier() {
             </p>
           </div>
 
-          {/* 4 Surfaced Proof Cards */}
+          {/* 4 Dithered Proof Cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {PORTFOLIO_DATA.signals.map((sig) => (
-              <div
+              <DitherCard
                 key={sig.label}
-                className="p-5 sm:p-6 rounded-2xl bg-[#070c18]/80 backdrop-blur-xl border border-white/[0.09] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.06),0_12px_36px_rgba(0,0,0,0.35)] space-y-2"
+                accentColor="#38bdf8"
+                ambientDither
+                cellSize={4}
+                className="p-5 sm:p-6"
               >
-                <div className="font-display text-2xl sm:text-3xl font-bold text-white">
-                  {sig.value}
+                <div className="space-y-2">
+                  <div className="font-display text-2xl sm:text-3xl font-bold text-white">
+                    {sig.value}
+                  </div>
+                  <div className="text-xs font-semibold text-sky-400">
+                    {sig.label}
+                  </div>
+                  <div className="text-xs text-slate-400 leading-relaxed">
+                    {sig.detail}
+                  </div>
                 </div>
-                <div className="text-xs font-semibold text-sky-400">
-                  {sig.label}
-                </div>
-                <div className="text-xs text-slate-400 leading-relaxed">
-                  {sig.detail}
-                </div>
-              </div>
+              </DitherCard>
             ))}
           </div>
 
@@ -547,41 +553,45 @@ export default function KineticDossier() {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {PORTFOLIO_DATA.experience.map((exp) => (
-              <div
+              <DitherCard
                 key={exp.company}
-                className="p-6 sm:p-8 rounded-2xl bg-[#070c18]/82 backdrop-blur-xl border border-white/[0.09] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.06),0_16px_45px_rgba(0,0,0,0.4)] space-y-5"
+                accentColor="#3b82f6"
+                cellSize={4}
+                className="p-6 sm:p-8"
               >
-                <div className="flex items-start justify-between gap-3">
-                  <div>
-                    <h3 className="font-display text-2xl font-bold text-white">
-                      {exp.company}
-                    </h3>
-                    <div className="text-sm text-sky-300 font-medium mt-1">
-                      {exp.role} · {exp.location}
+                <div className="space-y-5">
+                  <div className="flex items-start justify-between gap-3">
+                    <div>
+                      <h3 className="font-display text-2xl font-bold text-white">
+                        {exp.company}
+                      </h3>
+                      <div className="text-sm text-sky-300 font-medium mt-1">
+                        {exp.role} · {exp.location}
+                      </div>
                     </div>
+                    <span className="text-xs text-slate-400 font-medium shrink-0 pt-1">
+                      {exp.date}
+                    </span>
                   </div>
-                  <span className="text-xs text-slate-400 font-medium shrink-0 pt-1">
-                    {exp.date}
-                  </span>
+
+                  {exp.metrics && (
+                    <div className="rounded-lg bg-white/[0.03] border border-white/[0.07] px-3.5 py-2.5 text-xs font-medium text-slate-200">
+                      {exp.metrics.join(" · ")}
+                    </div>
+                  )}
+
+                  <ul className="space-y-3 text-sm text-slate-300 leading-relaxed">
+                    {exp.points.map((pt, i) => (
+                      <li key={i} className="flex items-start gap-2.5">
+                        <span className="text-sky-400 mt-1 text-xs shrink-0">
+                          •
+                        </span>
+                        <span>{pt}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-
-                {exp.metrics && (
-                  <div className="rounded-lg bg-white/[0.03] border border-white/[0.07] px-3.5 py-2.5 text-xs font-medium text-slate-200">
-                    {exp.metrics.join(" · ")}
-                  </div>
-                )}
-
-                <ul className="space-y-3 text-sm text-slate-300 leading-relaxed">
-                  {exp.points.map((pt, i) => (
-                    <li key={i} className="flex items-start gap-2.5">
-                      <span className="text-sky-400 mt-1 text-xs shrink-0">
-                        •
-                      </span>
-                      <span>{pt}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              </DitherCard>
             ))}
           </div>
         </section>
@@ -609,7 +619,7 @@ export default function KineticDossier() {
             ))}
           </div>
 
-          {/* All Secondary Projects in Clean Surfaced Grid */}
+          {/* Secondary Projects in Dithered Grid */}
           <div
             data-accent-color="#3b82f6"
             className="pt-10 space-y-6"
@@ -620,47 +630,51 @@ export default function KineticDossier() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               {secondary.map((p) => (
-                <div
+                <DitherCard
                   key={p.id}
-                  className="p-6 rounded-2xl bg-[#070c18]/78 backdrop-blur-xl border border-white/[0.08] hover:border-white/[0.15] transition-colors flex flex-col justify-between gap-5"
+                  accentColor="#60a5fa"
+                  cellSize={4}
+                  className="p-6"
                 >
-                  <div className="space-y-2.5">
-                    <div className="flex items-baseline justify-between gap-2">
-                      <h4 className="font-display text-lg font-bold text-white">
-                        {p.name}
-                      </h4>
-                      <span className="text-xs text-slate-400 shrink-0">
-                        {p.date}
-                      </span>
+                  <div className="flex flex-col justify-between gap-5 h-full">
+                    <div className="space-y-2.5">
+                      <div className="flex items-baseline justify-between gap-2">
+                        <h4 className="font-display text-lg font-bold text-white">
+                          {p.name}
+                        </h4>
+                        <span className="text-xs text-slate-400 shrink-0">
+                          {p.date}
+                        </span>
+                      </div>
+                      <div className="text-xs font-medium text-sky-400">
+                        {p.domain}
+                      </div>
+                      <p className="text-sm text-slate-300 leading-relaxed">
+                        {p.points[0]}
+                      </p>
                     </div>
-                    <div className="text-xs font-medium text-sky-400">
-                      {p.domain}
-                    </div>
-                    <p className="text-sm text-slate-300 leading-relaxed">
-                      {p.points[0]}
-                    </p>
-                  </div>
 
-                  <div className="flex items-center justify-between gap-3 pt-4 border-t border-white/[0.06]">
-                    <span className="text-xs text-slate-400 truncate">
-                      {p.tags.slice(0, 3).join(" · ")}
-                    </span>
-                    <div className="flex items-center gap-3 shrink-0">
-                      {p.links.map((l) => (
-                        <a
-                          key={l.url}
-                          href={l.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1 text-xs font-medium text-sky-300 hover:text-white transition-colors"
-                        >
-                          <span>{l.label}</span>
-                          <ArrowUpRight className="w-3.5 h-3.5" />
-                        </a>
-                      ))}
+                    <div className="flex items-center justify-between gap-3 pt-4 border-t border-white/[0.06]">
+                      <span className="text-xs text-slate-400 truncate">
+                        {p.tags.slice(0, 3).join(" · ")}
+                      </span>
+                      <div className="flex items-center gap-3 shrink-0">
+                        {p.links.map((l) => (
+                          <a
+                            key={l.url}
+                            href={l.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1 text-xs font-medium text-sky-300 hover:text-white transition-colors"
+                          >
+                            <span>{l.label}</span>
+                            <ArrowUpRight className="w-3.5 h-3.5" />
+                          </a>
+                        ))}
+                      </div>
                     </div>
                   </div>
-                </div>
+                </DitherCard>
               ))}
             </div>
           </div>
@@ -672,87 +686,102 @@ export default function KineticDossier() {
           data-accent-color="#2563eb"
           className="py-16 grid grid-cols-1 lg:grid-cols-12 gap-6"
         >
-          <div className="lg:col-span-6 p-6 sm:p-8 rounded-2xl bg-[#070c18]/82 backdrop-blur-xl border border-white/[0.09] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.06),0_16px_45px_rgba(0,0,0,0.4)] space-y-6">
-            <h2 className="font-display text-2xl font-bold text-white">
-              Research, Open Source &amp; Honors
-            </h2>
+          <DitherCard
+            accentColor="#3b82f6"
+            cellSize={4}
+            className="lg:col-span-6 p-6 sm:p-8"
+          >
+            <div className="space-y-6">
+              <h2 className="font-display text-2xl font-bold text-white">
+                Research, Open Source &amp; Honors
+              </h2>
 
-            <div className="divide-y divide-white/[0.07]">
-              {PORTFOLIO_DATA.achievements.map((a) => (
-                <div key={a.title} className="py-4 first:pt-0 last:pb-0 space-y-1.5">
-                  <div className="flex items-baseline justify-between gap-2">
-                    <h3 className="font-semibold text-white text-sm">
-                      {a.title}
-                    </h3>
-                    {a.badge && (
-                      <span className="text-xs text-sky-300 font-medium shrink-0">
-                        {a.badge}
-                      </span>
-                    )}
+              <div className="divide-y divide-white/[0.07]">
+                {PORTFOLIO_DATA.achievements.map((a) => (
+                  <div
+                    key={a.title}
+                    className="py-4 first:pt-0 last:pb-0 space-y-1.5"
+                  >
+                    <div className="flex items-baseline justify-between gap-2">
+                      <h3 className="font-semibold text-white text-sm">
+                        {a.title}
+                      </h3>
+                      {a.badge && (
+                        <span className="text-xs text-sky-300 font-medium shrink-0">
+                          {a.badge}
+                        </span>
+                      )}
+                    </div>
+                    <p className="text-sm text-slate-300 leading-relaxed">
+                      {a.desc}
+                    </p>
                   </div>
-                  <p className="text-sm text-slate-300 leading-relaxed">
-                    {a.desc}
-                  </p>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
 
-            <div className="flex flex-wrap gap-5 pt-2 border-t border-white/[0.07] text-xs font-medium">
-              <a
-                href={PORTFOLIO_DATA.scholar}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-sky-300 hover:text-white"
-              >
-                <BookOpen className="w-3.5 h-3.5" />
-                <span>Google Scholar</span>
-              </a>
-              <a
-                href={PORTFOLIO_DATA.leetcode}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-sky-300 hover:text-white"
-              >
-                <Code2 className="w-3.5 h-3.5" />
-                <span>LeetCode (350+)</span>
-              </a>
-            </div>
-          </div>
-
-          <div className="lg:col-span-6 p-6 sm:p-8 rounded-2xl bg-[#070c18]/82 backdrop-blur-xl border border-white/[0.09] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.06),0_16px_45px_rgba(0,0,0,0.4)] space-y-6">
-            <h2 className="font-display text-2xl font-bold text-white">
-              Technical Skills &amp; Education
-            </h2>
-
-            <div className="space-y-4">
-              {Object.entries(PORTFOLIO_DATA.skills).map(([k, list]) => (
-                <div key={k} className="space-y-1">
-                  <div className="text-xs font-semibold text-sky-400">
-                    {SKILL_LABELS[k] ?? k}
-                  </div>
-                  <div className="text-sm text-slate-200 leading-relaxed">
-                    {list.join(" · ")}
-                  </div>
-                </div>
-              ))}
-
-              <div className="pt-5 border-t border-white/[0.08] space-y-1.5">
-                <div className="font-semibold text-white text-sm">
-                  {PORTFOLIO_DATA.education[0].institution} —{" "}
-                  {PORTFOLIO_DATA.education[0].degree}
-                </div>
-                <div className="text-xs text-sky-300">
-                  {PORTFOLIO_DATA.education[0].date} ·{" "}
-                  {PORTFOLIO_DATA.education[0].score}
-                </div>
-                {PORTFOLIO_DATA.education[0].coursework && (
-                  <div className="text-xs text-slate-400 pt-1 leading-relaxed">
-                    {PORTFOLIO_DATA.education[0].coursework.join(" · ")}
-                  </div>
-                )}
+              <div className="flex flex-wrap gap-5 pt-2 border-t border-white/[0.07] text-xs font-medium">
+                <a
+                  href={PORTFOLIO_DATA.scholar}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-sky-300 hover:text-white"
+                >
+                  <BookOpen className="w-3.5 h-3.5" />
+                  <span>Google Scholar</span>
+                </a>
+                <a
+                  href={PORTFOLIO_DATA.leetcode}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-sky-300 hover:text-white"
+                >
+                  <Code2 className="w-3.5 h-3.5" />
+                  <span>LeetCode (350+)</span>
+                </a>
               </div>
             </div>
-          </div>
+          </DitherCard>
+
+          <DitherCard
+            accentColor="#3b82f6"
+            cellSize={4}
+            className="lg:col-span-6 p-6 sm:p-8"
+          >
+            <div className="space-y-6">
+              <h2 className="font-display text-2xl font-bold text-white">
+                Technical Skills &amp; Education
+              </h2>
+
+              <div className="space-y-4">
+                {Object.entries(PORTFOLIO_DATA.skills).map(([k, list]) => (
+                  <div key={k} className="space-y-1">
+                    <div className="text-xs font-semibold text-sky-400">
+                      {SKILL_LABELS[k] ?? k}
+                    </div>
+                    <div className="text-sm text-slate-200 leading-relaxed">
+                      {list.join(" · ")}
+                    </div>
+                  </div>
+                ))}
+
+                <div className="pt-5 border-t border-white/[0.08] space-y-1.5">
+                  <div className="font-semibold text-white text-sm">
+                    {PORTFOLIO_DATA.education[0].institution} —{" "}
+                    {PORTFOLIO_DATA.education[0].degree}
+                  </div>
+                  <div className="text-xs text-sky-300">
+                    {PORTFOLIO_DATA.education[0].date} ·{" "}
+                    {PORTFOLIO_DATA.education[0].score}
+                  </div>
+                  {PORTFOLIO_DATA.education[0].coursework && (
+                    <div className="text-xs text-slate-400 pt-1 leading-relaxed">
+                      {PORTFOLIO_DATA.education[0].coursework.join(" · ")}
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          </DitherCard>
         </section>
 
         {/* Footer */}
