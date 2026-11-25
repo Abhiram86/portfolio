@@ -1,9 +1,15 @@
-import MidnightAzure from './variants/MidnightAzure'
+import KineticDossier from "./variants/KineticDossier";
+import MidnightAzure from "./variants/MidnightAzure";
 
 function App() {
-  return <MidnightAzure />
+  const params = new URLSearchParams(window.location.search);
+  const v = params.get("v");
+
+  if (v === "midnight") {
+    return <MidnightAzure />;
+  }
+
+  return <KineticDossier />;
 }
 
-export default App
-
-
+export default App;
