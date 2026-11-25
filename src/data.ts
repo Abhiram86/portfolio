@@ -393,7 +393,7 @@ export const PORTFOLIO_DATA: PortfolioData = {
       diagramId: "datarover",
       media: {
         type: "image",
-        src: "/media/datarover-ui.png",
+        src: "/media/datarover-ui.webp",
         caption: "In-browser DuckDB-WASM SQL workspace paired with AI schema agent",
         aspect: "landscape",
       },

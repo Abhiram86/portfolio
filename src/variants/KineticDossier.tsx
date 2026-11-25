@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
-import ScrollFluid3D from "../components/ScrollFluid3D";
-import ResumeModal from "../components/ResumeModal";
+import { lazy, Suspense, useEffect, useState } from "react";
 import ProjectInternals from "../components/ProjectInternals";
 import DitherCard from "../components/DitherCard";
 import { PORTFOLIO_DATA, type ProjectItem } from "../data";
 import { GithubIcon, LinkedinIcon } from "../components/Icons";
+
+const ScrollFluid3D = lazy(() => import("../components/ScrollFluid3D"));
+const ResumeModal = lazy(() => import("../components/ResumeModal"));
 import {
   ArrowUpRight,
   BookOpen,
@@ -228,7 +229,9 @@ export default function KineticDossier() {
 
   return (
     <div className="relative min-h-screen bg-[#04060c] text-slate-100 font-sans antialiased">
-      <ScrollFluid3D accentHex={accentHex} />
+      <Suspense fallback={<div className="fixed inset-0 z-0 bg-[#04060c]" />}>
+        <ScrollFluid3D accentHex={accentHex} />
+      </Suspense>
 
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-8">
         {/* Clean Editorial Header */}
@@ -630,7 +633,14 @@ export default function KineticDossier() {
         </footer>
       </div>
 
-      <ResumeModal isOpen={isResumeOpen} onClose={() => setIsResumeOpen(false)} />
+      {isResumeOpen && (
+        <Suspense fallback={null}>
+          <ResumeModal
+            isOpen={isResumeOpen}
+            onClose={() => setIsResumeOpen(false)}
+          />
+        </Suspense>
+      )}
     </div>
   );
 }

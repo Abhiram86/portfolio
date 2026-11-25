@@ -53,6 +53,10 @@ export default function DitherCard({
   const borderRef = useRef<HTMLDivElement>(null!);
   const [hovered, setHovered] = useState(false);
 
+  // Store dynamic flags in refs so changing scroll dominance never reallocates ImageData
+  const isDominantRef = useRef(isDominant);
+  const isVisibleRef = useRef(true);
+
   const stateRef = useRef({
     mx: 0.78,
     my: 0.25,
@@ -66,6 +70,13 @@ export default function DitherCard({
   });
 
   useEffect(() => {
+    isDominantRef.current = isDominant;
+    if (isDominant) {
+      cardRef.current?.dispatchEvent(new Event("dither-wake"));
+    }
+  }, [isDominant]);
+
+  useEffect(() => {
     const canvas = canvasRef.current;
     const card = cardRef.current;
     if (!canvas || !card) return;
@@ -76,6 +87,7 @@ export default function DitherCard({
     const prefersReduced = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     ).matches;
+    const isCoarsePointer = window.matchMedia("(pointer: coarse)").matches;
 
     const [r, g, b] = parseHexRgb(accentColor);
     // Crisp luminous step (25% lift) for vivid, readable Bayer stair-stepping
@@ -108,6 +120,7 @@ export default function DitherCard({
       s.hoverAlpha += (s.targetHover - s.hoverAlpha) * Math.min(1, dt * 7);
       s.pulseAge += dt;
 
+      const dominant = isDominantRef.current;
       const data = imgData.data;
       const px = s.mx * cols;
       const py = s.my * rows;
@@ -116,7 +129,7 @@ export default function DitherCard({
       const pulseActive = s.pulseAge < 1.35;
       const pulseRadius = s.pulseAge * Math.max(cols, rows) * 1.15;
 
-      const baseBoost = isDominant ? 0.52 : ambientDither ? 0.36 : 0.0;
+      const baseBoost = dominant ? 0.52 : ambientDither ? 0.36 : 0.0;
       const spotStrength = s.hoverAlpha * 0.68;
       const spotRadius = Math.max(20, cols * 0.22);
 
@@ -129,7 +142,6 @@ export default function DitherCard({
         for (let x = 0; x < cols; x++) {
           const xNorm = x / cols;
 
-          // Distinct Bayer-dithered diagonal crest in top-right / borders
           let energy = 0;
           if (baseBoost > 0) {
             const cornerBias = xNorm * 0.74 + (1 - yNorm) * 0.34;
@@ -143,7 +155,6 @@ export default function DitherCard({
             energy += Math.pow(cornerBias, 1.55) * wave * baseBoost;
           }
 
-          // Vivid hollow Bayer ring around cursor (clear center under pointer)
           if (spotStrength > 0.005) {
             const dx = x - px;
             const dist = Math.sqrt(dx * dx + dySpot * dySpot);
@@ -155,7 +166,6 @@ export default function DitherCard({
             }
           }
 
-          // Expanding Bayer shockwave on click
           if (pulseActive) {
             const dxP = x - pulseCx;
             const dist = Math.sqrt(dxP * dxP + dyPulse * dyPulse);
@@ -166,7 +176,6 @@ export default function DitherCard({
             }
           }
 
-          // Keep below 0.76 so ordered 8x8 Bayer grid texture remains distinct
           if (energy > 0.76) energy = 0.76;
 
           const idx = (y * cols + x) * 4;
@@ -190,21 +199,23 @@ export default function DitherCard({
 
       ctx.putImageData(imgData, 0, 0);
 
-      // Keep running while hovered, dominant, ambient, or pulsing
-      const needsLoop =
-        !prefersReduced &&
-        (isDominant ||
-          ambientDither ||
-          s.targetHover > 0 ||
-          s.hoverAlpha > 0.01 ||
-          pulseActive);
-      return needsLoop;
+      // Pause completely when off-screen, reduced-motion, or idle coarse touchscreen
+      if (prefersReduced || !isVisibleRef.current) return false;
+      if (isCoarsePointer && !pulseActive) return false;
+
+      return (
+        dominant ||
+        ambientDither ||
+        s.targetHover > 0 ||
+        s.hoverAlpha > 0.01 ||
+        pulseActive
+      );
     };
 
     resize();
     const ro = new ResizeObserver(() => {
       resize();
-      if (!rafId) {
+      if (!rafId && isVisibleRef.current) {
         renderFrame(0);
       }
     });
@@ -212,7 +223,23 @@ export default function DitherCard({
 
     let last = performance.now();
     const loop = (now: number) => {
-      const dt = Math.min(0.05, (now - last) / 1000);
+      const s = stateRef.current;
+      const isInteractive =
+        s.targetHover > 0 || s.hoverAlpha > 0.01 || s.pulseAge < 1.35;
+      // Run 60fps during active hover/pulse, throttle slow ambient wave to ~22fps
+      const minInterval = isInteractive ? 15 : 44;
+      const elapsedMs = now - last;
+
+      if (elapsedMs < minInterval) {
+        if (isVisibleRef.current) {
+          rafId = window.requestAnimationFrame(loop);
+        } else {
+          rafId = 0;
+        }
+        return;
+      }
+
+      const dt = Math.min(0.08, elapsedMs / 1000);
       last = now;
       const keepGoing = renderFrame(dt);
       if (keepGoing) {
@@ -223,27 +250,40 @@ export default function DitherCard({
     };
 
     const startLoop = () => {
-      if (!rafId) {
+      if (!rafId && isVisibleRef.current && !prefersReduced) {
         last = performance.now();
         rafId = window.requestAnimationFrame(loop);
       }
     };
 
-    // Initial draw
-    if (renderFrame(0.016)) {
-      startLoop();
-    }
+    const io = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        if (!entry) return;
+        isVisibleRef.current = entry.isIntersecting;
+        if (entry.isIntersecting) {
+          if (renderFrame(0.016)) {
+            startLoop();
+          }
+        } else if (rafId) {
+          window.cancelAnimationFrame(rafId);
+          rafId = 0;
+        }
+      },
+      { rootMargin: "120px 0px" }
+    );
+    io.observe(card);
 
-    // Wake loop when card receives pointer enter or click pulse
     const onWake = () => startLoop();
     card.addEventListener("dither-wake", onWake);
 
     return () => {
       if (rafId) window.cancelAnimationFrame(rafId);
       ro.disconnect();
+      io.disconnect();
       card.removeEventListener("dither-wake", onWake);
     };
-  }, [accentColor, ambientDither, cellSize, isDominant]);
+  }, [accentColor, ambientDither, cellSize]);
 
   const updateBorder = (nx: number, ny: number, visible: boolean) => {
     if (!borderRef.current) return;
@@ -307,7 +347,7 @@ export default function DitherCard({
       onPointerMove={handlePointerMove}
       onPointerLeave={handlePointerLeave}
       onClick={handleClick}
-      className={`relative rounded-2xl bg-[#070c18]/84 backdrop-blur-xl border transition-colors duration-300 overflow-hidden shadow-[inset_0_1px_0_0_rgba(255,255,255,0.06),0_18px_50px_rgba(0,0,0,0.45)] ${
+      className={`relative rounded-2xl bg-[#070c18]/92 md:bg-[#070c18]/86 md:backdrop-blur-sm border transition-colors duration-300 overflow-hidden shadow-[inset_0_1px_0_0_rgba(255,255,255,0.06),0_18px_50px_rgba(0,0,0,0.45)] ${
         isDominant || hovered
           ? "border-white/[0.18]"
           : "border-white/[0.08]"
@@ -321,7 +361,7 @@ export default function DitherCard({
         className="pointer-events-none absolute inset-0 w-full h-full"
       />
 
-      {/* Directional readability scrim: protects left/center text while letting corner & ring dither pop */}
+      {/* Directional readability scrim */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0"

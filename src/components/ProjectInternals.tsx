@@ -273,6 +273,9 @@ export default function ProjectInternals({
   const hasBenchmarks = Boolean(project.benchmarks?.length);
   const hasMedia = Boolean(project.media);
   const specs = PROJECT_SPECS[project.id];
+  const isCoarsePointer =
+    typeof window !== "undefined" &&
+    window.matchMedia("(pointer: coarse)").matches;
   const accent = project.accentColor || "#38bdf8";
 
   type TabId = "topology" | "benchmarks" | "demo" | "specs";
@@ -344,7 +347,7 @@ export default function ProjectInternals({
                 <video
                   src={project.media.src}
                   poster={project.media.poster}
-                  autoPlay
+                  autoPlay={!isCoarsePointer}
                   loop
                   muted
                   playsInline

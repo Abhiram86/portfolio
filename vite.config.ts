@@ -8,4 +8,21 @@ export default defineConfig({
     react(),
     babel({ presets: [reactCompilerPreset()] })
   ],
+  build: {
+    rolldownOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes('node_modules/three')) {
+            return 'three-core'
+          }
+          if (id.includes('node_modules/@react-three')) {
+            return 'r3f-vendor'
+          }
+          if (id.includes('node_modules/react-dom') || id.includes('node_modules/react/')) {
+            return 'react-vendor'
+          }
+        },
+      },
+    },
+  },
 })
