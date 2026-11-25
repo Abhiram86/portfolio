@@ -366,7 +366,7 @@ export const PORTFOLIO_DATA: PortfolioData = {
       architecturePipeline: [
         "Streaming Agent Loop",
         "Tool Registry & Safety Gates",
-        "17 Android Intents + Shell",
+        "Android Intents + Sandboxed Shell",
         "In-App Browser DOM Bridge",
         "Drift SQLite + AES-256-GCM",
       ],
@@ -374,11 +374,11 @@ export const PORTFOLIO_DATA: PortfolioData = {
         "Zero-root execution with no Accessibility service declared",
         "Destructive shell commands gated behind explicit user approval",
         "API keys encrypted with AES-256-GCM separately from SQLite state",
-        "Large tool outputs (>6K chars) cached to disk with head/tail slices",
+        "Tool outputs >6K chars cached atomically on disk with head/tail slices",
       ],
       points: [
-        "Shipped a zero-root Android AI agent (Flutter/Kotlin) exposing 17 system intents, a sandboxed shell with destructive-op safety gates, and an in-app browser agent (DOM control, OAuth handoff) over a long-horizon tool-calling loop (up to 72 turns with automatic context compaction).",
-        "Implemented local-first SQLite/Drift persistence, streaming reasoning, sandboxed PDF/Office extraction, background WorkManager/AlarmManager scheduling, and atomic OTA self-updates.",
+        "Shipped a zero-root Android AI agent (Flutter/Kotlin) exposing OS intents (17 settings targets, system actions), a sandboxed shell with 3-tier safety gates, and an in-app browser agent (DOM control, OAuth handoff) over a 72-turn tool-calling loop with automatic context compaction.",
+        "Implemented local-first 7-table SQLite/Drift persistence, AES-256-GCM secret storage, PDF/Office extraction, AlarmManager + JobScheduler background scheduling, and SHA-256 verified OTA self-updates.",
       ],
     },
     {
@@ -410,9 +410,9 @@ export const PORTFOLIO_DATA: PortfolioData = {
         "Neon Postgres (Drizzle)",
       ],
       invariants: [
-        "Zero backend compute cost for dataset queries and transforms",
-        "Full SQL + Python execution locally inside browser memory",
-        "Batched AI streaming updates via requestAnimationFrame",
+        "Zero backend compute cost for SQL & Python execution over Parquet datasets",
+        "SQL mutations gated behind explicit user confirmation toast",
+        "Matplotlib plots stripped from LLM context and stored in Supabase plots bucket",
       ],
       points: [
         "Built a browser-native analytics engine executing full SQL (DuckDB-WASM) and Python (Pyodide) over CSV/Excel datasets client-side with zero backend compute cost.",
